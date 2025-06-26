@@ -51,9 +51,6 @@ def encode_json(msg):
     return json.loads(to_load)
 
 
-def check_spidey(finalists: List) -> bool:
-    return my_name == finalists[0]
-
 @retry(stop=stop_after_attempt(3))
 async def send_one(topic: str, msg: List):
     try:
