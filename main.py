@@ -63,7 +63,7 @@ async def send_one(topic: str, msg: List):
             await producer.send_and_wait(topic, msg)
 
     except Exception as err:
-        print(f"Some Kafka error: {err}")
+        logger.exception(f"Some Kafka error: {err}")
 
 async def spiderweb_turn(msg):
     try:
@@ -74,7 +74,7 @@ async def spiderweb_turn(msg):
         if my_name == finalists[0]:
             placement = len(finalists)
             logger.info("I won this round!", placement=placement)
-            print(mapping_place[placement].replace("name", my_name))
+            logger.info(mapping_place[placement].replace("name", my_name))
 
             if len(finalists) > 1:
                 await play_turn(finalists[1:])  # Pass remaining players
@@ -106,8 +106,8 @@ async def consume():
     try:
         await consumer.start()
 
-    except Exception as e:
-        print(e)
+    except Exception as err:
+        logger.exception(err)
         return
 
     try:
