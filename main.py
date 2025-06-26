@@ -46,10 +46,6 @@ async def play_turn(finalists: List):
     await send_one(topic=spiderweb_topic, msg=spidey_order)
 
 
-def kafka_serializer(value):
-    return json.dumps(value).encode()
-
-
 def encode_json(msg):
     to_load = msg.value.decode("utf-8")
     return json.loads(to_load)
